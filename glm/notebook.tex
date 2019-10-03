@@ -1,0 +1,875 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Generalized Linear Models}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{generalized-linear-models}{%
+\section{Generalized Linear Models}\label{generalized-linear-models}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kp}{getwd}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    '/Users/harsh/code/adbi/3-regression/1-glm'
+
+    
+    \hypertarget{load-the-data}{%
+\subsubsection{Load the Data}\label{load-the-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{library}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{readxl\PYZsq{}}\PY{p}{)}
+        df \PY{o}{\PYZlt{}\PYZhy{}} read\PYZus{}excel\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{eBayAuctions.xls\PYZsq{}}\PY{p}{)}
+        \PY{k+kp}{colnames}\PY{p}{(}df\PY{p}{)}\PY{p}{[}\PY{k+kp}{which}\PY{p}{(}\PY{k+kp}{names}\PY{p}{(}df\PY{p}{)} \PY{o}{==} \PY{l+s}{\PYZdq{}}\PY{l+s}{Competitive?\PYZdq{}}\PY{p}{)}\PY{p}{]} \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{competitive\PYZdq{}}
+        \PY{k+kp}{names}\PY{p}{(}df\PY{p}{)} \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{tolower}\PY{p}{(}\PY{k+kp}{names}\PY{p}{(}df\PY{p}{)}\PY{p}{)}
+        \PY{k+kp}{summary}\PY{p}{(}df\PY{p}{)}
+        \PY{k+kp}{dim}\PY{p}{(}df\PY{p}{)}
+        \PY{k+kp}{head}\PY{p}{(}df\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+readxl works best with a newer version of the tibble package.
+You currently have tibble v1.4.2.
+Falling back to column name repair from tibble <= v1.4.2.
+Message displays once per session.
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+   category           currency          sellerrating      duration     
+ Length:1972        Length:1972        Min.   :    0   Min.   : 1.000  
+ Class :character   Class :character   1st Qu.:  595   1st Qu.: 5.000  
+ Mode  :character   Mode  :character   Median : 1853   Median : 7.000  
+                                       Mean   : 3560   Mean   : 6.486  
+                                       3rd Qu.: 3380   3rd Qu.: 7.000  
+                                       Max.   :37727   Max.   :10.000  
+    endday            closeprice        openprice       competitive    
+ Length:1972        Min.   :  0.010   Min.   :  0.01   Min.   :0.0000  
+ Class :character   1st Qu.:  4.907   1st Qu.:  1.23   1st Qu.:0.0000  
+ Mode  :character   Median :  9.995   Median :  4.50   Median :1.0000  
+                    Mean   : 36.449   Mean   : 12.93   Mean   :0.5406  
+                    3rd Qu.: 28.000   3rd Qu.:  9.99   3rd Qu.:1.0000  
+                    Max.   :999.000   Max.   :999.00   Max.   :1.0000  
+    \end{verbatim}
+
+    
+    \begin{enumerate*}
+\item 1972
+\item 8
+\end{enumerate*}
+
+
+    
+    \begin{tabular}{r|llllllll}
+ category & currency & sellerrating & duration & endday & closeprice & openprice & competitive\\
+\hline
+	 Music/Movie/Game & US               & 3249             & 5                & Mon              & 0.01             & 0.01             & 0               \\
+	 Music/Movie/Game & US               & 3249             & 5                & Mon              & 0.01             & 0.01             & 0               \\
+	 Music/Movie/Game & US               & 3249             & 5                & Mon              & 0.01             & 0.01             & 0               \\
+	 Music/Movie/Game & US               & 3249             & 5                & Mon              & 0.01             & 0.01             & 0               \\
+	 Music/Movie/Game & US               & 3249             & 5                & Mon              & 0.01             & 0.01             & 0               \\
+	 Music/Movie/Game & US               & 3249             & 5                & Mon              & 0.01             & 0.01             & 0               \\
+\end{tabular}
+
+
+    
+    \hypertarget{create-pivot-table-and-dummy-columns}{%
+\subsubsection{Create Pivot Table and Dummy
+Columns}\label{create-pivot-table-and-dummy-columns}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{library}\PY{p}{(}reshape\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Function to generate Pivot table for a colum}
+        generatePivotTable \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}df\PY{p}{,} \PY{k+kp}{col}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{c+c1}{\PYZsh{} Melt the column we want    }
+            df\PYZus{}melt \PY{o}{=} melt\PY{p}{(}df\PY{p}{,} id.vars \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{k+kp}{col}\PY{p}{)}\PY{p}{,} measure.vars \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{competitive\PYZsq{}}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Cast to pivot form}
+            p\PYZus{}table \PY{o}{\PYZlt{}\PYZhy{}} cast\PY{p}{(}df\PYZus{}melt\PY{p}{,} \PY{k+kp}{paste}\PY{p}{(}\PY{k+kp}{paste}\PY{p}{(}\PY{k+kp}{col}\PY{p}{)}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZti{}\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{variable\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{k+kp}{mean}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Duplicate the first column so we can merge}
+            p\PYZus{}table\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{merge\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}\PYZhy{}} p\PYZus{}table\PY{p}{[}\PY{l+m}{1}\PY{p}{]}
+            \PY{c+c1}{\PYZsh{} Number of rows in the table}
+            len \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{dim}\PY{p}{(}p\PYZus{}table\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Threshold of ratio/mean to use for merging the categorical varaibles}
+            threshold \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+m}{0.05}
+            \PY{c+c1}{\PYZsh{} Merge}
+            \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}\PY{p}{(}len\PY{l+m}{\PYZhy{}1}\PY{p}{)}\PY{p}{)} \PY{p}{\PYZob{}}
+                \PY{k+kr}{for} \PY{p}{(}j \PY{k+kr}{in} \PY{p}{(}i\PY{l+m}{+1}\PY{p}{)}\PY{o}{:}len\PY{p}{)}\PY{p}{\PYZob{}}
+                    \PY{k+kr}{if} \PY{p}{(}\PY{k+kp}{abs}\PY{p}{(}p\PYZus{}table\PY{p}{[}i\PY{p}{,}\PY{l+m}{2}\PY{p}{]} \PY{o}{\PYZhy{}} p\PYZus{}table\PY{p}{[}j\PY{p}{,}\PY{l+m}{2}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZlt{}} threshold\PY{p}{)} \PY{p}{\PYZob{}}
+                        p\PYZus{}table\PY{p}{[}j\PY{p}{,}\PY{l+m}{3}\PY{p}{]} \PY{o}{=} p\PYZus{}table\PY{p}{[}i\PY{p}{,}\PY{l+m}{3}\PY{p}{]}
+                    \PY{p}{\PYZcb{}}
+                \PY{p}{\PYZcb{}}
+            \PY{p}{\PYZcb{}}
+            \PY{k+kr}{return} \PY{p}{(}p\PYZus{}table\PY{p}{)}
+        \PY{p}{\PYZcb{}}
+        
+        createDummy \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}x\PY{p}{,} \PY{k+kp}{col}\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{k+kr}{for} \PY{p}{(}level \PY{k+kr}{in} \PY{k+kp}{unique}\PY{p}{(}x\PY{p}{[}\PY{p}{,}\PY{k+kp}{col}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{p}{\PYZob{}}
+                x\PY{p}{[}\PY{k+kp}{paste}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{d\PYZsq{}}\PY{p}{,} \PY{k+kp}{col}\PY{p}{,} level\PY{p}{,} sep \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZus{}\PYZdq{}}\PY{p}{)}\PY{p}{]} \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{ifelse}\PY{p}{(}x\PY{p}{[}\PY{p}{,}\PY{k+kp}{col}\PY{p}{]} \PY{o}{==} level\PY{p}{,} \PY{l+m}{1}\PY{p}{,} \PY{l+m}{0}\PY{p}{)}
+            \PY{p}{\PYZcb{}}
+            \PY{k+kr}{return}\PY{p}{(}x\PY{p}{)}
+        \PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{} Columns to check and merge}
+        columns \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{category\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{currency\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{endday\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{duration\PYZsq{}}\PY{p}{)}
+        
+        \PY{k+kr}{for} \PY{p}{(}col \PY{k+kr}{in} columns\PY{p}{)} \PY{p}{\PYZob{}}
+            \PY{c+c1}{\PYZsh{} Generate Pivot table for col}
+            p\PYZus{}table \PY{o}{\PYZlt{}\PYZhy{}} generatePivotTable\PY{p}{(}df\PY{p}{,} \PY{k+kp}{col}\PY{p}{)}
+            \PY{k+kp}{print}\PY{p}{(}p\PYZus{}table\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Merge Rows}
+            rows \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{dim}\PY{p}{(}p\PYZus{}table\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{)}
+            \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}rows\PY{p}{)} \PY{p}{\PYZob{}}
+              df\PY{p}{[}df\PY{p}{[}\PY{k+kp}{paste}\PY{p}{(}\PY{k+kp}{col}\PY{p}{)}\PY{p}{]} \PY{o}{==} p\PYZus{}table\PY{p}{[}i\PY{p}{,}\PY{l+m}{1}\PY{p}{]}\PY{p}{,} \PY{k+kp}{paste}\PY{p}{(}\PY{k+kp}{col}\PY{p}{)}\PY{p}{]} \PY{o}{=} p\PYZus{}table\PY{p}{[}i\PY{p}{,}\PY{l+m}{3}\PY{p}{]}
+            \PY{p}{\PYZcb{}}
+            \PY{c+c1}{\PYZsh{} Create dummy columns     }
+            df \PY{o}{\PYZlt{}\PYZhy{}} createDummy\PY{p}{(}df\PY{p}{,} \PY{k+kp}{col}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Drop the column}
+            df\PY{p}{[}\PY{p}{,} \PY{k+kp}{paste}\PY{p}{(}\PY{k+kp}{col}\PY{p}{)}\PY{p}{]} \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kc}{NULL}
+        \PY{p}{\PYZcb{}}
+        
+        \PY{k+kp}{head}\PY{p}{(}df\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message in 1:(len - 1):
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+               category competitive               merge
+1     Antique/Art/Craft   0.5649718   Antique/Art/Craft
+2            Automotive   0.3539326          Automotive
+3                 Books   0.5000000               Books
+4   Business/Industrial   0.6666667 Business/Industrial
+5  Clothing/Accessories   0.5042017               Books
+6          Coins/Stamps   0.2972973        Coins/Stamps
+7          Collectibles   0.5774059   Antique/Art/Craft
+8              Computer   0.6666667 Business/Industrial
+9           Electronics   0.8000000         Electronics
+10       EverythingElse   0.2352941      EverythingElse
+11        Health/Beauty   0.1718750       Health/Beauty
+12          Home/Garden   0.6568627 Business/Industrial
+13              Jewelry   0.3658537          Automotive
+14     Music/Movie/Game   0.6029777   Antique/Art/Craft
+15          Photography   0.8461538         Electronics
+16        Pottery/Glass   0.3500000          Automotive
+17        SportingGoods   0.7258065       SportingGoods
+18         Toys/Hobbies   0.5299145   Antique/Art/Craft
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message in 1:rows:
+“numerical expression has 2 elements: only the first used”Warning message in 1:(len - 1):
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  currency competitive merge
+1      EUR   0.5515947   EUR
+2      GBP   0.6870748   GBP
+3       US   0.5193498   EUR
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message in 1:rows:
+“numerical expression has 2 elements: only the first used”Warning message in 1:(len - 1):
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  endday competitive merge
+1    Fri   0.4668990   Fri
+2    Mon   0.6733577   Mon
+3    Sat   0.4273504   Fri
+4    Sun   0.4852071   Fri
+5    Thu   0.6039604   Thu
+6    Tue   0.5321637   Fri
+7    Wed   0.4800000   Fri
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message in 1:rows:
+“numerical expression has 2 elements: only the first used”Warning message in 1:(len - 1):
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”Warning message in (i + 1):len:
+“numerical expression has 2 elements: only the first used”
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  duration competitive merge
+1        1   0.5217391     1
+2        3   0.4507042     3
+3        5   0.6866953     5
+4        7   0.4891417     3
+5       10   0.5445545     1
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message in 1:rows:
+“numerical expression has 2 elements: only the first used”
+    \end{Verbatim}
+
+    \begin{tabular}{r|lllllllllllllllllllll}
+ sellerrating & closeprice & openprice & competitive & d\_category\_Antique/Art/Craft & d\_category\_Automotive & d\_category\_SportingGoods & d\_category\_Business/Industrial & d\_category\_Books & d\_category\_Electronics & ⋯ & d\_category\_Coins/Stamps & d\_category\_Health/Beauty & d\_currency\_EUR & d\_currency\_GBP & d\_endday\_Mon & d\_endday\_Fri & d\_endday\_Thu & d\_duration\_5 & d\_duration\_3 & d\_duration\_1\\
+\hline
+	 3249 & 0.01 & 0.01 & 0    & 1    & 1    & 1    & 1    & 1    & 1    & ⋯    & 1    & 1    & 1    & 1    & 1    & 1    & 1    & 1    & 1    & 1   \\
+	 3249 & 0.01 & 0.01 & 0    & 0    & 0    & 0    & 0    & 0    & 0    & ⋯    & 0    & 0    & 0    & 0    & 0    & 0    & 0    & 0    & 0    & 0   \\
+	 3249 & 0.01 & 0.01 & 0    & 0    & 0    & 0    & 0    & 0    & 0    & ⋯    & 0    & 0    & 1    & 1    & 0    & 0    & 0    & 0    & 0    & 0   \\
+	 3249 & 0.01 & 0.01 & 0    & 0    & 0    & 0    & 0    & 0    & 0    & ⋯    & 0    & 0    & 0    & 0    & 1    & 1    & 1    & 1    & 1    & 1   \\
+	 3249 & 0.01 & 0.01 & 0    & 0    & 0    & 0    & 0    & 0    & 0    & ⋯    & 0    & 0    & 1    & 1    & 0    & 0    & 0    & 0    & 0    & 0   \\
+	 3249 & 0.01 & 0.01 & 0    & 0    & 0    & 0    & 0    & 0    & 0    & ⋯    & 0    & 0    & 0    & 0    & 0    & 0    & 0    & 0    & 0    & 0   \\
+\end{tabular}
+
+
+    
+    \hypertarget{split-data-into-traintest}{%
+\subsubsection{Split Data into
+train/test}\label{split-data-into-traintest}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} 60\PYZpc{} of the sample size}
+        smp\PYZus{}size \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{floor}\PY{p}{(}\PY{l+m}{0.60} \PY{o}{*} \PY{k+kp}{nrow}\PY{p}{(}df\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} set the seed to make your partition reproducible}
+        \PY{k+kp}{set.seed}\PY{p}{(}\PY{l+m}{123}\PY{p}{)}
+        train\PYZus{}ind \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{sample}\PY{p}{(}\PY{k+kp}{seq\PYZus{}len}\PY{p}{(}\PY{k+kp}{nrow}\PY{p}{(}df\PY{p}{)}\PY{p}{)}\PY{p}{,} size \PY{o}{=} smp\PYZus{}size\PY{p}{)}
+        
+        train \PY{o}{\PYZlt{}\PYZhy{}} df\PY{p}{[}train\PYZus{}ind\PY{p}{,} \PY{p}{]}
+        test \PY{o}{\PYZlt{}\PYZhy{}} df\PY{p}{[}\PY{o}{\PYZhy{}}train\PYZus{}ind\PY{p}{,} \PY{p}{]}
+\end{Verbatim}
+
+
+    \hypertarget{train-fit.all}{%
+\subsubsection{Train fit.all}\label{train-fit.all}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} fit.all \PY{o}{\PYZlt{}\PYZhy{}} glm\PY{p}{(}\PY{l+s+sb}{`competitive`} \PY{o}{\PYZti{}}\PY{l+m}{.}\PY{p}{,} family \PY{o}{=} binomial\PY{p}{(}link \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{logit\PYZsq{}}\PY{p}{)}\PY{p}{,} data \PY{o}{=} train\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+“glm.fit: fitted probabilities numerically 0 or 1 occurred”
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kp}{summary}\PY{p}{(}fit.all\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+Call:
+glm(formula = competitive ~ ., family = binomial(link = "logit"), 
+    data = train)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-4.7429  -0.9375   0.0001   0.9968   2.4957  
+
+Coefficients: (13 not defined because of singularities)
+                                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                      -2.220e-01  1.349e-01  -1.645   0.0999 .  
+sellerrating                     -2.305e-05  1.330e-05  -1.733   0.0831 .  
+closeprice                        1.355e-01  1.310e-02  10.341   <2e-16 ***
+openprice                        -1.512e-01  1.378e-02 -10.969   <2e-16 ***
+`d_category_Antique/Art/Craft`   -2.976e-02  2.193e-01  -0.136   0.8921    
+d_category_Automotive                    NA         NA      NA       NA    
+d_category_SportingGoods                 NA         NA      NA       NA    
+`d_category_Business/Industrial`         NA         NA      NA       NA    
+d_category_Books                         NA         NA      NA       NA    
+d_category_Electronics                   NA         NA      NA       NA    
+d_category_EverythingElse                NA         NA      NA       NA    
+`d_category_Coins/Stamps`                NA         NA      NA       NA    
+`d_category_Health/Beauty`               NA         NA      NA       NA    
+d_currency_EUR                   -2.153e-01  1.357e-01  -1.587   0.1126    
+d_currency_GBP                           NA         NA      NA       NA    
+d_endday_Mon                     -1.813e-02  1.542e-01  -0.118   0.9064    
+d_endday_Fri                             NA         NA      NA       NA    
+d_endday_Thu                             NA         NA      NA       NA    
+d_duration_5                     -1.237e-01  1.585e-01  -0.780   0.4353    
+d_duration_3                             NA         NA      NA       NA    
+d_duration_1                             NA         NA      NA       NA    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1636.4  on 1182  degrees of freedom
+Residual deviance: 1258.3  on 1175  degrees of freedom
+AIC: 1274.3
+
+Number of Fisher Scoring iterations: 8
+
+    \end{verbatim}
+
+    
+    \hypertarget{predict-and-check-accuracy}{%
+\subsubsection{Predict and check
+accuracy}\label{predict-and-check-accuracy}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} predicted \PY{o}{\PYZlt{}\PYZhy{}} predict\PY{p}{(}fit.all\PY{p}{,} test\PY{p}{,} type \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{response\PYZsq{}}\PY{p}{)}
+         predicted \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{ifelse}\PY{p}{(}predicted \PY{o}{\PYZgt{}} \PY{l+m}{0.5}\PY{p}{,} \PY{l+m}{1}\PY{p}{,} \PY{l+m}{0}\PY{p}{)}
+         accuracy \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{mean}\PY{p}{(}test\PY{o}{\PYZdl{}}competitive \PY{o}{==} predicted\PY{p}{)}
+         \PY{k+kp}{print}\PY{p}{(}accuracy\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message in predict.lm(object, newdata, se.fit, scale = 1, type = ifelse(type == :
+“prediction from a rank-deficient fit may be misleading”
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1] 0.7756654
+
+    \end{Verbatim}
+
+    \hypertarget{find-predictor-with-highest-absolute-coefficient-value}{%
+\subsubsection{find predictor with highest absolute coefficient
+value}\label{find-predictor-with-highest-absolute-coefficient-value}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} coef \PY{o}{=} fit.all\PY{o}{\PYZdl{}}coefficients
+         \PY{k+kp}{print}\PY{p}{(}coef\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+                     (Intercept)                     sellerrating 
+                   -2.220110e-01                    -2.304733e-05 
+                      closeprice                        openprice 
+                    1.354970e-01                    -1.511612e-01 
+  `d\_category\_Antique/Art/Craft`            d\_category\_Automotive 
+                   -2.975724e-02                               NA 
+        d\_category\_SportingGoods `d\_category\_Business/Industrial` 
+                              NA                               NA 
+                d\_category\_Books           d\_category\_Electronics 
+                              NA                               NA 
+       d\_category\_EverythingElse        `d\_category\_Coins/Stamps` 
+                              NA                               NA 
+      `d\_category\_Health/Beauty`                   d\_currency\_EUR 
+                              NA                    -2.153414e-01 
+                  d\_currency\_GBP                     d\_endday\_Mon 
+                              NA                    -1.812749e-02 
+                    d\_endday\_Fri                     d\_endday\_Thu 
+                              NA                               NA 
+                    d\_duration\_5                     d\_duration\_3 
+                   -1.236763e-01                               NA 
+                    d\_duration\_1 
+                              NA 
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k+kp}{sort}\PY{p}{(}\PY{k+kp}{abs}\PY{p}{(}coef\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{description*}
+\item[sellerrating] 2.30473328886959e-05
+\item[d\textbackslash{}\_endday\textbackslash{}\_Mon] 0.0181274874325235
+\item[`d\textbackslash{}\_category\textbackslash{}\_Antique/Art/Craft`] 0.029757244212542
+\item[d\textbackslash{}\_duration\textbackslash{}\_5] 0.123676280673723
+\item[closeprice] 0.135496990839086
+\item[openprice] 0.151161171550078
+\item[d\textbackslash{}\_currency\textbackslash{}\_EUR] 0.215341437564903
+\item[(Intercept)] 0.222011004707867
+\end{description*}
+
+
+    
+    \hypertarget{train-fit.single}{%
+\subsubsection{Train fit.single}\label{train-fit.single}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} max \PY{o}{=} \PY{l+m}{0}
+         name \PY{o}{=} \PY{k+kp}{names}\PY{p}{(}coef\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}
+         index \PY{o}{=} \PY{l+m}{1}\PY{p}{;}
+         \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{2}\PY{o}{:}\PY{k+kp}{length}\PY{p}{(}coef\PY{p}{)}\PY{p}{)} \PY{p}{\PYZob{}}
+             val \PY{o}{=} \PY{k+kp}{abs}\PY{p}{(}\PY{k+kp}{as.numeric}\PY{p}{(}coef\PY{p}{[}i\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{k+kr}{if} \PY{p}{(}\PY{o}{!}\PY{k+kp}{is.na}\PY{p}{(}val\PY{p}{)} \PY{o}{\PYZam{}\PYZam{}} val \PY{o}{\PYZgt{}} \PY{k+kp}{abs}\PY{p}{(}\PY{k+kp}{as.numeric}\PY{p}{(}\PY{k+kp}{max}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{p}{\PYZob{}}
+                 name \PY{o}{=} \PY{k+kp}{names}\PY{p}{(}coef\PY{p}{)}\PY{p}{[}i\PY{p}{]}
+                 \PY{k+kr}{if} \PY{p}{(}name \PY{o}{!=} \PY{l+s}{\PYZsq{}}\PY{l+s}{(Intercept)\PYZsq{}}\PY{p}{)} \PY{p}{\PYZob{}}
+                     max \PY{o}{=} coef\PY{p}{[}i\PY{p}{]}
+                     index \PY{o}{=} i
+                 \PY{p}{\PYZcb{}}
+             \PY{p}{\PYZcb{}}  
+         \PY{p}{\PYZcb{}}
+         
+         \PY{k+kp}{print}\PY{p}{(}\PY{k+kp}{max}\PY{p}{)}
+         \PY{k+kp}{print}\PY{p}{(}name\PY{p}{)}
+         
+         subset \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{competitive\PYZdq{}}\PY{p}{,} name\PY{p}{)}
+         fit.single \PY{o}{=} glm\PY{p}{(}competitive \PY{o}{\PYZti{}}\PY{l+m}{.}\PY{p}{,} family \PY{o}{=} binomial\PY{p}{(}link\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{logit\PYZsq{}}\PY{p}{)}\PY{p}{,} data \PY{o}{=} train\PY{p}{[}\PY{k+kp}{subset}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+d\_currency\_EUR 
+    -0.2153414 
+[1] "d\_currency\_EUR"
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k+kp}{summary}\PY{p}{(}fit.single\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+Call:
+glm(formula = competitive ~ ., family = binomial(link = "logit"), 
+    data = train[subset])
+
+Deviance Residuals: 
+   Min      1Q  Median      3Q     Max  
+-1.261  -1.189   1.096   1.166   1.166  
+
+Coefficients:
+               Estimate Std. Error z value Pr(>|z|)  
+(Intercept)     0.19549    0.08308   2.353   0.0186 *
+d_currency_EUR -0.16873    0.11659  -1.447   0.1478  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1636.4  on 1182  degrees of freedom
+Residual deviance: 1634.3  on 1181  degrees of freedom
+AIC: 1638.3
+
+Number of Fisher Scoring iterations: 3
+
+    \end{verbatim}
+
+    
+    \hypertarget{find-significant-predictors}{%
+\subsubsection{Find Significant
+predictors}\label{find-significant-predictors}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} significance\PYZus{}level \PY{o}{=} \PY{l+m}{0.05}
+         
+         coefs \PY{o}{=} \PY{k+kp}{summary}\PY{p}{(}fit.all\PY{p}{)}\PY{o}{\PYZdl{}}coefficients
+         significant\PYZus{}predictors \PY{o}{=} coefs\PY{p}{[}coefs\PY{p}{[}\PY{p}{,}\PY{l+m}{4}\PY{p}{]} \PY{o}{\PYZlt{}} significance\PYZus{}level\PY{p}{,}\PY{p}{]}
+         \PY{k+kp}{print}\PY{p}{(}significant\PYZus{}predictors\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+             Estimate Std. Error   z value     Pr(>|z|)
+closeprice  0.1354970 0.01310350  10.34052 4.620204e-25
+openprice  -0.1511612 0.01378103 -10.96879 5.399195e-28
+
+    \end{Verbatim}
+
+    \hypertarget{train-fit.reduced}{%
+\subsubsection{Train fit.reduced}\label{train-fit.reduced}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} subset \PY{o}{=} \PY{k+kp}{names}\PY{p}{(}significant\PYZus{}predictors\PY{p}{[}\PY{p}{,}\PY{l+m}{1}\PY{p}{]}\PY{p}{)}
+         subset \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{competitive\PYZsq{}}\PY{p}{,} \PY{k+kp}{subset}\PY{p}{)}
+         fit.reduced \PY{o}{=} glm\PY{p}{(}competitive \PY{o}{\PYZti{}}\PY{l+m}{.}\PY{p}{,} family \PY{o}{=} binomial\PY{p}{(}link\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{logit\PYZsq{}}\PY{p}{)}\PY{p}{,} data \PY{o}{=} train\PY{p}{[}\PY{k+kp}{subset}\PY{p}{]}\PY{p}{)}
+         \PY{k+kp}{summary}\PY{p}{(}fit.reduced\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Warning message:
+“glm.fit: fitted probabilities numerically 0 or 1 occurred”
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+
+Call:
+glm(formula = competitive ~ ., family = binomial(link = "logit"), 
+    data = train[subset])
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-4.7397  -0.9455   0.0001   1.0102   2.5705  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -0.46376    0.08590  -5.399 6.72e-08 ***
+closeprice   0.13790    0.01317  10.467  < 2e-16 ***
+openprice   -0.15364    0.01386 -11.083  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1636.4  on 1182  degrees of freedom
+Residual deviance: 1264.7  on 1180  degrees of freedom
+AIC: 1270.7
+
+Number of Fisher Scoring iterations: 8
+
+    \end{verbatim}
+
+    
+    \hypertarget{anova}{%
+\subsubsection{Anova}\label{anova}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} anova\PY{p}{(}fit.reduced\PY{p}{,} fit.all\PY{p}{,} test\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Chisq\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|lllll}
+ Resid. Df & Resid. Dev & Df & Deviance & Pr(>Chi)\\
+\hline
+	 1180      & 1264.706  & NA        &       NA  &        NA\\
+	 1175      & 1258.281  &  5        & 6.425043  & 0.2670283\\
+\end{tabular}
+
+
+    
+    \hypertarget{over-dispersion-test}{%
+\subsubsection{Over-Dispersion test}\label{over-dispersion-test}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{k+kn}{library}\PY{p}{(}qcc\PY{p}{)}
+         s \PY{o}{=} \PY{k+kp}{rep}\PY{p}{(}\PY{k+kp}{length}\PY{p}{(}train\PY{o}{\PYZdl{}}competitive\PY{p}{)}\PY{p}{,} \PY{k+kp}{length}\PY{p}{(}train\PY{o}{\PYZdl{}}competitive\PY{p}{)}\PY{p}{)}
+         qcc.overdispersion.test\PY{p}{(}train\PY{o}{\PYZdl{}}competitive\PY{p}{,} size \PY{o}{=} s\PY{p}{,} type\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{binomial\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Package 'qcc' version 2.7
+Type 'citation("qcc")' for citing this R package in publications.
+
+    \end{Verbatim}
+
+    \begin{tabular}{r|lll}
+  & Obs.Var/Theor.Var & Statistic & p-value\\
+\hline
+	binomial data & 0.4731382 & 559.2494  & 1        \\
+\end{tabular}
+
+
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
