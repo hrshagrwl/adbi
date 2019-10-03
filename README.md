@@ -11,7 +11,7 @@
 - [Network Properties in Spark GraphFrames](https://github.com/hrshagrwl/network-properties-spark-graphframes)
 
 ### Regression
-- [Generalized Linear Models]()
+- [Generalized Linear Models](https://github.com/hrshagrwl/business-intelligence-projects/tree/master/glm)
 - [Predicting Bitcoin Price Variations using Bayesian Regression](https://github.com/hrshagrwl/bitcoin-price-variation-using-bayesian-regression)
 
 ### Graph Data Mining
@@ -21,7 +21,7 @@
 - [Supervised Learning Techniques for Sentiment Analytics](https://github.com/hrshagrwl/supervised-sentiment-analysis)
 
 ### Deep Neural Networks
-- [SGD for Linear Regression with L2 Regularization]()
+- [SGD for Linear Regression with L2 Regularization](https://github.com/hrshagrwl/business-intelligence-projects/tree/master/sgd)
 - [Defect Segmentation on Textured Surfaces](https://github.com/hrshagrwl/defect-segmentation)
 
 ## Capstone Project
