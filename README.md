@@ -24,8 +24,9 @@
 - [SGD for Linear Regression with L2 Regularization]()
 - [Defect Segmentation on Textured Surfaces](https://github.com/hrshagrwl/defect-segmentation)
 
+## Capstone Project
 
-
+- [Fake News Detection](https://github.com/hrshagrwl/fake-news-classifier)
 
 
 
